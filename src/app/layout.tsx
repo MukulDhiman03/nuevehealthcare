@@ -8,7 +8,18 @@ import Footer from "@/components/Footer";
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="dark">
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+          if (localStorage.theme === 'dark') {
+            document.documentElement.classList.add('dark');
+          }
+        `,
+          }}
+        />
+      </head>
       <body>
         <Header />
         <main>{children}</main>
