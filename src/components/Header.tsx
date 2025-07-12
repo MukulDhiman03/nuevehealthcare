@@ -56,7 +56,7 @@ export default function Header() {
                 <div className="md:hidden flex items-center gap-3">
                     <ThemeToggle />
                     <button onClick={() => setMenuOpen(!menuOpen)} className="text-white dark:text-white">
-                        {menuOpen ? <X size={28} /> : <Menu size={28} style={{ color: " #f36633" }} />}
+                        {menuOpen ? <X size={28} style={{ color: " #f36633" }} /> : <Menu size={28} style={{ color: " #f36633" }} />}
                     </button>
                 </div>
             </div>
