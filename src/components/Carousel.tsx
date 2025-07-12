@@ -7,8 +7,16 @@ export default function Carousel() {
         {
             loop: true,
             slides: {
-                perView: 3,       // Show 3 images at a time
-                spacing: 16,       // Optional: space between images (px)
+                perView: 1,
+                spacing: 16,
+            },
+            breakpoints: {
+                "(min-width: 640px)": {
+                    slides: { perView: 2, spacing: 16 },
+                },
+                "(min-width: 1024px)": {
+                    slides: { perView: 3, spacing: 16 },
+                },
             },
         },
         [
