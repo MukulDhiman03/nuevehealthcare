@@ -1,6 +1,8 @@
 // This file defines the overall layout structure of your application.
 // It's like your HTML template that wraps every page in the app.
 // This is like your global HTML template. It defines the HTML skeleton — <html>, <head>, <body>, and wraps all your pages.
+"use client"
+
 
 import Header from "@/components/Header";
 import "./globals.css";
