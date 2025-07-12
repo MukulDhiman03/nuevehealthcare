@@ -21,16 +21,16 @@ export default function ThemeToggle() {
         setIsDark(!isDark);
     };
 
-    if (isDark === null) return null; // Don't render until theme is known
+    if (isDark === null) return null;
 
     return (
         <div className="flex items-center space-x-2">
-            <span className="text-sm text-white">
+            <span className="text-sm dark:text-white text-black">
                 {isDark ? "Light" : "Dark"} Mode
             </span>
             <button
                 onClick={toggleTheme}
-                className={`w-12 h-6 flex items-center rounded-full p-1 duration-300 ease-in-out ${isDark ? "bg-gray-800" : "bg-gray-300"
+                className={`w-12 h-6 flex items-center rounded-full p-1 duration-300 ease-in-out ${isDark ? "bg-[var(--orange-color)]" : "bg-gray-300"
                     }`}
             >
                 <div

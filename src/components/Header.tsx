@@ -1,12 +1,15 @@
 "use client";
-
+import { useState } from "react";
 import ThemeToggle from "./ThemeToggle";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
+import { Menu, X } from "lucide-react";
 
 export default function Header() {
     const pathname = usePathname();
+    const [menuOpen, setMenuOpen] = useState(false);
+
     const links = [
         { href: "/", label: "Home" },
         { href: "/company", label: "Company" },
@@ -14,51 +17,68 @@ export default function Header() {
         { href: "/apiportfolio", label: "API" },
         { href: "/investors", label: "Investors" },
         { href: "/blogs", label: "Blogs" },
+        { href: "/contact", label: "📞 Contact" },
     ];
 
     return (
-        <header>
-            <div className="flex justify-between p-2 bg-[var(--bg-gray-color)]">
+        <header className="border-b shadow-sm dark:bg-[var(--bg-gray-color)]">
+            {/* Top bar */}
+            <div className="flex justify-between items-center px-4 py-3 md:px-6">
+                {/* Logo */}
                 <Link href="/">
-                    <Image className="" src="/assets/logo.jpg" alt="logo" width={100} height={60} />
+                    <Image
+                        src="/assets/logo.jpg"
+                        alt="Logo"
+                        width={100}
+                        height={50}
+                        className="rounded-md object-contain"
+                    />
                 </Link>
-                <div className="flex justify-center items-center gap-16 px-2 ">
-                    <div>
-                        <Link className="text-white font-semibold text-xl p-4 hover:text-black hover:bg-white hover:rounded" href="/contact">📞Contact</Link>
-                    </div>
-                    <div>
-                        <ThemeToggle />
-                    </div>
+
+                {/* Desktop Nav */}
+                <div className="hidden md:flex items-center gap-6">
+                    {links.map((link) => (
+                        <Link
+                            key={link.href}
+                            href={link.href}
+                            className={`px-3 py-2 rounded-md font-medium text-base transition-colors duration-300 ${pathname === link.href
+                                ? "bg-[var(--bg-gray-color)] text-white dark:bg-white dark:text-black"
+                                : "text-black dark:text-white hover:bg-gray-100 dark:hover:bg-gray-800"
+                                }`}
+                        >
+                            {link.label}
+                        </Link>
+                    ))}
+                    <ThemeToggle />
+                </div>
+
+                {/* Mobile Hamburger */}
+                <div className="md:hidden flex items-center gap-3">
+                    <ThemeToggle />
+                    <button onClick={() => setMenuOpen(!menuOpen)} className="text-white dark:text-white">
+                        {menuOpen ? <X size={28} /> : <Menu size={28} style={{ color: " #f36633" }} />}
+                    </button>
                 </div>
             </div>
-            <div className="flex justify-end gap-x-16 p-3 dark:bg-[#3A3A3A] border-b">
-                {links.map((link) => (
-                    <Link
-                        key={link.href}
-                        href={link.href}
-                        className={`p-4 font-semibold text-xl rounded 
-      transition-all duration-300 ease-in-out
-      ${pathname === link.href
-                                ? "bg-[var(--bg-gray-color)] text-white dark:text-black dark:bg-white"
-                                : "text-black dark:text-white dark:hover:border-white dark:hover:text-white hover:text-black hover:border"}
-    `}
-                    >
-                        {link.label}
-                    </Link>
-                ))}
 
-            </div>
-        </header >
-    )
+            {/* Mobile Menu */}
+            {menuOpen && (
+                <div className="md:hidden px-4 py-3 space-y-3 bg-white dark:bg-[var(--bg-gray-color)] transition-all duration-300">
+                    {links.map((link) => (
+                        <Link
+                            key={link.href}
+                            href={link.href}
+                            className={`block px-3 py-2 rounded-md font-medium text-base transition-colors duration-200 ${pathname === link.href
+                                ? "bg-[var(--bg-gray-color)] text-white dark:bg-white dark:text-black"
+                                : "text-black dark:text-white hover:bg-gray-100 dark:hover:bg-gray-800"
+                                }`}
+                            onClick={() => setMenuOpen(false)}
+                        >
+                            {link.label}
+                        </Link>
+                    ))}
+                </div>
+            )}
+        </header>
+    );
 }
-/*** 
-<div className="flex justify-end gap-x-16 p-3 dark:bg-[#3A3A3A] border-b">
-    <Link className="p-4 dark:text-white font-semibold text-xl hover:text-white hover:bg-black hover:rounded" href="/">Home</Link>
-    <Link href="/company" className="p-4 dark:text-white font-semibold text-xl hover:text-white hover:bg-black hover:rounded">Company</Link>
-    <Link href="/innovation" className="p-4 dark:text-white font-semibold text-xl hover:text-white hover:bg-black hover:rounded">Innovation</Link>
-    <Link href="/apiportfolio" className="p-4 dark:text-white font-semibold text-xl hover:text-white hover:bg-black hover:rounded">API</Link>
-    <Link href="/investors" className="p-4 dark:text-white font-semibold text-xl hover:text-white hover:bg-black hover:rounded">Investors</Link>
-    <Link href="/blogs" className="p-4 dark:text-white font-semibold text-xl hover:text-white hover:bg-black hover:rounded">Blogs</Link>
-</div>
-
-***/

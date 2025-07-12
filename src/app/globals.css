@@ -1,7 +1,24 @@
 @import "tailwindcss";
 @custom-variant dark (&:where(.dark, .dark *));
 
+* {
+    box-sizing: border-box;
+
+}
+
 @theme {
     --bg-gray-color: #262626;
     --orange-color: #f36633;
+}
+
+.custom_buttons {
+    background-color: var(--orange-color);
+    color: white;
+    transition: all 0.3s ease;
+}
+
+.custom_buttons:hover {
+    background-color: white;
+    color: var(--orange-color);
+    border: 1px solid var(--orange-color);
 }
