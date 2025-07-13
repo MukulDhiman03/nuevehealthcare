@@ -15,11 +15,12 @@ const apiData = [
 
 export default function ApiPortfolio() {
     return (
-        <div className="dark:bg-[var(--bg-gray-color)] dark:text-white p-15">
-            <div className=" px-6 py-12 max-w-7xl mx-auto">
+        <div className="dark:bg-[var(--bg-gray-color)] dark:text-white p-6">
+            <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
                 <h1 className="text-4xl font-bold text-center mb-10">Our API Portfolio</h1>
 
-                <div className="overflow-x-auto">
+                {/* For large screens - Table view */}
+                <div className="hidden md:block overflow-x-auto">
                     <table className="w-full text-left border-collapse rounded-lg shadow-lg">
                         <thead className="bg-gray-200 dark:bg-gray-700 text-black dark:text-white">
                             <tr>
@@ -51,6 +52,45 @@ export default function ApiPortfolio() {
                             ))}
                         </tbody>
                     </table>
+                </div>
+
+                {/* For small screens - Card view */}
+                <div className="md:hidden space-y-6">
+                    {apiData.map((api, idx) => (
+                        <div
+                            key={idx}
+                            className="bg-white dark:bg-gray-800 p-5 rounded-lg shadow-md space-y-2"
+                        >
+                            <div>
+                                <span className="font-bold">API Name: </span>
+                                {api.name}
+                            </div>
+                            <div>
+                                <span className="font-bold">Therapeutic Area: </span>
+                                {api.area}
+                            </div>
+                            <div>
+                                <span className="font-bold">CAS Number: </span>
+                                {api.cas}
+                            </div>
+                            <div>
+                                <span className="font-bold">DMF Status: </span>
+                                {api.dmf}
+                            </div>
+                            <div>
+                                <span className="font-bold">CEP Status: </span>
+                                {api.cep}
+                            </div>
+                            <div>
+                                <Link
+                                    href={`/apiportfolio/${api.name.toLowerCase()}`}
+                                    className="text-[var(--orange-color)] font-semibold hover:underline"
+                                >
+                                    View Details
+                                </Link>
+                            </div>
+                        </div>
+                    ))}
                 </div>
             </div>
         </div>
