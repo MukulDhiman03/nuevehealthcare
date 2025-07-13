@@ -1,10 +1,43 @@
-export default function Investors() {
-    return <div className="flex flex-col items-center justify-center min-h-[70vh] text-center p-8 dark:bg-[var(--bg-gray-color)] dark:text-white">
-        <h1 className="text-4xl font-bold mb-4">🚧 Page Under Construction</h1>
-        <p className="text-lg mb-6 max-w-md">
-            We're working hard to build this page. Soon you'll be able to reach out to us directly through this space.
-        </p>
-        <p className="text-sm text-gray-500 dark:text-gray-400">Stay tuned! In the meantime, you can reach us at:</p>
-        <p className="text-md mt-1">📧 connect@nuevehealthcare.com</p>
-    </div>
+"use client";
+
+export default function InvestorsPage() {
+    return (
+        <div className="dark:bg-[var(--bg-gray-color)] dark:text-white px-6 py-11 ">
+            {/* Headline */}
+            <h1 className="text-4xl font-bold text-center mb-6">
+                Investing in the Engine of the Pharmaceutical Industry
+            </h1>
+
+            {/* Intro Text */}
+            <p className="text-lg max-w-3xl mx-auto text-center mb-12">
+                Nueve Healthcare represents a unique investment in the foundational layer of the pharma industry.
+                Our strategy is focused on sustainable growth through a high-value API pipeline, expansion of
+                manufacturing capabilities, and forging long-term partnerships with global leaders.
+            </p>
+
+            {/* Sections */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto text-center">
+                <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6 hover:scale-105 transition-transform">
+                    <h2 className="text-2xl font-semibold mb-2">Shareholder Information</h2>
+                    <p className="text-sm">
+                        Transparent, detailed, and timely reports for stakeholders and shareholders.
+                    </p>
+                </div>
+
+                <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6 hover:scale-105 transition-transform">
+                    <h2 className="text-2xl font-semibold mb-2">Corporate Governance</h2>
+                    <p className="text-sm">
+                        Guided by ethical leadership, compliance, and accountability at every level.
+                    </p>
+                </div>
+
+                <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6 hover:scale-105 transition-transform">
+                    <h2 className="text-2xl font-semibold mb-2">Stock Info</h2>
+                    <p className="text-sm">
+                        View up-to-date company stock insights, performance charts, and investment data.
+                    </p>
+                </div>
+            </div>
+        </div>
+    );
 }
