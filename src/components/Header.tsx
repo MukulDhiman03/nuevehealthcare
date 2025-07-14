@@ -21,7 +21,7 @@ export default function Header() {
     ];
 
     return (
-        <header className="border-b shadow-sm dark:bg-[var(--bg-gray-color)]">
+        <header className="sticky top-0 z-50 border-b shadow-sm bg-white dark:bg-[var(--bg-gray-color)] backdrop-blur-md bg-opacity-90">
             {/* Top bar */}
             <div className="flex justify-between items-center px-4 py-3 md:px-6">
                 {/* Logo */}
