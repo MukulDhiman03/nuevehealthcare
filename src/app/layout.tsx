@@ -6,6 +6,8 @@
 import Header from "@/components/Header";
 import "./globals.css";
 import Footer from "@/components/Footer";
+import "leaflet/dist/leaflet.css";
+
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
