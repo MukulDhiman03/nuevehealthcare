@@ -18,7 +18,7 @@ export default function MapWithMarker() {
                 style={{ top: "39%", left: "62%" }}
             >
                 <Image
-                    src="/Marker.png"
+                    src="/marker.png"
                     alt="Uttarakhand Marker"
                     width={20}
                     height={10}
