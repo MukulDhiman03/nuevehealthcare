@@ -21,35 +21,43 @@ export default function ContactFormSection() {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+        setLoading(true);
+
+        const formBody = new URLSearchParams();
+        formBody.append("entry.367077121", formData.inquiryType);
+        formBody.append("entry.403680628", formData.name);
+        formBody.append("entry.250495031", formData.email);
+        formBody.append("entry.1401229000", formData.contact);
+        formBody.append("entry.822494858", formData.message);
 
         try {
-            const response = await fetch("https://script.google.com/macros/s/AKfycbwYlwl9ZsLrODcFkma4nBiEkkX1baUlw51L5d7h-2uxk9nRvPYsAwpwDPKD0bJa9B6C/exec", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(formData),
-            });
+            const response = await fetch(
+                "https://docs.google.com/forms/d/1gsQw43wd-M38eXVxmP0Wo5yMFsmGFR1DiNd8pGBGUTY/formResponse",
+                {
+                    method: "POST",
+                    mode: "no-cors", // required for Google Forms
+                    headers: {
+                        "Content-Type": "application/x-www-form-urlencoded",
+                    },
+                    body: formBody.toString(),
+                }
+            );
 
-            const result = await response.json();
-            if (result.result === "Success") {
-                alert("Thank you! Your inquiry has been submitted.");
-                setFormData({
-                    name: "",
-                    email: "",
-                    contact: "",
-                    inquiryType: "Sales & Partnerships",
-                    message: "",
-                });
-            } else {
-                alert("Something went wrong. Please try again.");
-            }
+            setSuccess(true);
+            setFormData({
+                name: "",
+                email: "",
+                contact: "",
+                inquiryType: "Sales & Partnerships",
+                message: "",
+            });
         } catch (error) {
-            console.error("Error submitting form:", error);
-            alert("Submission failed. Please check your internet or try again later.");
+            console.error("Form submission error:", error);
+            alert("Failed to submit. Please try again later.");
+        } finally {
+            setLoading(false);
         }
     };
-
 
     return (
         <div className="dark:bg-[var(--bg-gray-color)] dark:text-white py-12 px-6">
@@ -64,7 +72,7 @@ export default function ContactFormSection() {
                 >
                     <div>
                         <label className="block mb-1 font-semibold" htmlFor="inquiryType">
-                            Inquiry Type
+                            Inquiry Type *
                         </label>
                         <select
                             id="inquiryType"
@@ -74,9 +82,7 @@ export default function ContactFormSection() {
                             className="w-full p-3 rounded border dark:bg-gray-700 dark:border-gray-600"
                             required
                         >
-                            <option value="Sales & Partnerships">
-                                Sales & Partnerships
-                            </option>
+                            <option value="Sales & Partnerships">Sales & Partnerships</option>
                             <option value="Technical Support">Technical Support</option>
                             <option value="General Inquiries">General Inquiries</option>
                         </select>
@@ -84,7 +90,7 @@ export default function ContactFormSection() {
 
                     <div>
                         <label className="block mb-1 font-semibold" htmlFor="name">
-                            Name
+                            Name *
                         </label>
                         <input
                             type="text"
@@ -99,7 +105,7 @@ export default function ContactFormSection() {
 
                     <div>
                         <label className="block mb-1 font-semibold" htmlFor="email">
-                            Email
+                            Email *
                         </label>
                         <input
                             type="email"
@@ -114,7 +120,7 @@ export default function ContactFormSection() {
 
                     <div>
                         <label className="block mb-1 font-semibold" htmlFor="contact">
-                            Contact Number
+                            Contact Number *
                         </label>
                         <input
                             type="tel"
@@ -129,7 +135,7 @@ export default function ContactFormSection() {
 
                     <div>
                         <label className="block mb-1 font-semibold" htmlFor="message">
-                            Message
+                            Message *
                         </label>
                         <textarea
                             name="message"
@@ -159,30 +165,15 @@ export default function ContactFormSection() {
                 <div className="mt-10 text-sm text-center dark:text-gray-300">
                     <p>
                         <strong>Sales & Partnerships:</strong>{" "}
-                        <a
-                            href="mailto:sales@nuevehealthcare.com"
-                            className="underline"
-                        >
-                            sales@nuevehealthcare.com
-                        </a>
+                        <a href="mailto:sales@nuevehealthcare.com" className="underline">sales@nuevehealthcare.com</a>
                     </p>
                     <p>
                         <strong>Technical Support:</strong>{" "}
-                        <a
-                            href="mailto:technical.support@nuevehealthcare.com"
-                            className="underline"
-                        >
-                            technical.support@nuevehealthcare.com
-                        </a>
+                        <a href="mailto:technical.support@nuevehealthcare.com" className="underline">technical.support@nuevehealthcare.com</a>
                     </p>
                     <p>
                         <strong>General Inquiries:</strong>{" "}
-                        <a
-                            href="mailto:connect@nuevehealthcare.com"
-                            className="underline"
-                        >
-                            connect@nuevehealthcare.com
-                        </a>
+                        <a href="mailto:connect@nuevehealthcare.com" className="underline">connect@nuevehealthcare.com</a>
                     </p>
                 </div>
             </div>
